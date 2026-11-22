@@ -165,12 +165,18 @@
             <h3 class="font-bold text-slate-800 uppercase tracking-wider text-[11px] mb-2 pb-1 border-b border-slate-100">4. Technician & Estimate</h3>
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div>
-                    <label class="block font-semibold text-slate-700 mb-1">Assign Technician</label>
-                    <select name="technician_id" class="w-full px-2.5 py-1.5 rounded bg-slate-50 border border-slate-300 text-xs">
+                    <div class="flex items-center justify-between mb-1">
+                        <label class="block font-semibold text-slate-700">Assign Service Engineer</label>
+                        <button type="button" @click="openTechnicianModal()" class="text-[11px] font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-0.5">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                            <span>+ Add Engineer</span>
+                        </button>
+                    </div>
+                    <select name="technician_id" x-model="selectedTechnicianId" class="w-full px-2.5 py-1.5 rounded bg-slate-50 border border-slate-300 text-xs">
                         <option value="">-- Unassigned (Store Queue) --</option>
-                        @foreach($technicians as $tech)
-                            <option value="{{ $tech->id }}">{{ $tech->name }} ({{ str_replace('_', ' ', $tech->role) }})</option>
-                        @endforeach
+                        <template x-for="tech in technicianList" :key="tech.id">
+                            <option :value="tech.id" x-text="tech.name + (tech.phone ? ' (' + tech.phone + ')' : '')"></option>
+                        </template>
                     </select>
                 </div>
                 <div>
@@ -259,6 +265,67 @@
             </form>
         </div>
     </div>
+
+    <!-- Modal: Quick Add Service Engineer -->
+    <div x-show="showTechnicianModal" 
+         x-cloak 
+         class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-2xs"
+         @keydown.escape.window="showTechnicianModal = false">
+        <div class="bg-white rounded-lg shadow-xl border border-slate-200 max-w-md w-full overflow-hidden text-xs" @click.away="showTechnicianModal = false">
+            <div class="px-4 py-3 bg-slate-800 text-white flex items-center justify-between">
+                <div class="flex items-center gap-1.5 font-bold text-xs uppercase tracking-wider">
+                    <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                    <span>Add New Service Engineer</span>
+                </div>
+                <button type="button" @click="showTechnicianModal = false" class="text-slate-400 hover:text-white font-bold text-sm">&times;</button>
+            </div>
+
+            <form @submit.prevent="saveNewTechnician()" class="p-4 space-y-3">
+                <template x-if="technicianModalError">
+                    <div class="p-2 bg-red-50 text-red-700 border border-red-200 rounded text-[11px]" x-text="technicianModalError"></div>
+                </template>
+
+                <div>
+                    <label class="block font-semibold text-slate-700 mb-1">Service Engineer Name *</label>
+                    <input type="text" x-model="newTechnician.name" required placeholder="e.g. Ramesh Sharma" class="w-full px-2.5 py-1.5 rounded bg-slate-50 border border-slate-300 text-xs focus:bg-white focus:outline-none focus:border-indigo-500">
+                </div>
+
+                <div class="grid grid-cols-2 gap-2">
+                    <div>
+                        <label class="block font-semibold text-slate-700 mb-1">Mobile Number *</label>
+                        <input type="text" x-model="newTechnician.phone" placeholder="+91 98201 11222" class="w-full px-2.5 py-1.5 rounded bg-slate-50 border border-slate-300 text-xs focus:bg-white focus:outline-none focus:border-indigo-500">
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-slate-700 mb-1">Email (Optional)</label>
+                        <input type="email" x-model="newTechnician.email" placeholder="ramesh@webotapp.com" class="w-full px-2.5 py-1.5 rounded bg-slate-50 border border-slate-300 text-xs focus:bg-white focus:outline-none focus:border-indigo-500">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block font-semibold text-slate-700 mb-1">Assigned Branch *</label>
+                    <select x-model="newTechnician.branch_id" required class="w-full px-2.5 py-1.5 rounded bg-slate-50 border border-slate-300 text-xs focus:bg-white focus:outline-none focus:border-indigo-500">
+                        @foreach($branches as $b)
+                            <option value="{{ $b->id }}">{{ $b->name }} ({{ $b->code }})</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block font-semibold text-slate-700 mb-1">System Password</label>
+                    <input type="text" x-model="newTechnician.password" placeholder="Leave blank for password123" class="w-full px-2.5 py-1.5 rounded bg-slate-50 border border-slate-300 text-xs focus:bg-white focus:outline-none focus:border-indigo-500">
+                    <p class="text-[10px] text-slate-400 mt-0.5">Defaults to password123 if not specified</p>
+                </div>
+
+                <div class="pt-3 border-t border-slate-200 flex items-center justify-end gap-2">
+                    <button type="button" @click="showTechnicianModal = false" class="px-3 py-1.5 rounded bg-slate-100 hover:bg-slate-200 text-slate-700">Cancel</button>
+                    <button type="submit" :disabled="savingTechnician" class="px-4 py-1.5 rounded bg-indigo-600 hover:bg-indigo-500 text-white font-bold shadow-sm inline-flex items-center gap-1">
+                        <span x-show="!savingTechnician">Create &amp; Assign Engineer</span>
+                        <span x-show="savingTechnician">Saving...</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 
 <script>
@@ -280,6 +347,20 @@ function repairCreateComponent() {
             city: '',
             address: '',
             customer_type: 'retail'
+        },
+
+        // Service Engineer state
+        technicianList: @json($technicians),
+        selectedTechnicianId: '',
+        showTechnicianModal: false,
+        technicianModalError: '',
+        savingTechnician: false,
+        newTechnician: {
+            name: '',
+            phone: '',
+            email: '',
+            branch_id: '{{ $branchId ?: ($branches->first()?->id ?? 1) }}',
+            password: ''
         },
 
         init() {
@@ -383,6 +464,59 @@ function repairCreateComponent() {
                 this.modalError = 'Network error while creating customer: ' + err.message;
             } finally {
                 this.savingCustomer = false;
+            }
+        },
+
+        openTechnicianModal() {
+            this.technicianModalError = '';
+            this.newTechnician = {
+                name: '',
+                phone: '',
+                email: '',
+                branch_id: '{{ $branchId ?: ($branches->first()?->id ?? 1) }}',
+                password: ''
+            };
+            this.showTechnicianModal = true;
+        },
+
+        async saveNewTechnician() {
+            this.technicianModalError = '';
+            this.savingTechnician = true;
+            try {
+                const csrfMeta = document.querySelector('meta[name="csrf-token"]');
+                const csrfToken = csrfMeta ? csrfMeta.getAttribute('content') : '{{ csrf_token() }}';
+
+                const res = await fetch('{{ route("repairs.technicians.store") }}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'X-CSRF-TOKEN': csrfToken
+                    },
+                    body: JSON.stringify(this.newTechnician)
+                });
+
+                const data = await res.json();
+
+                if (!res.ok) {
+                    if (data.errors) {
+                        this.technicianModalError = Object.values(data.errors).flat().join(' ');
+                    } else {
+                        this.technicianModalError = data.message || 'Error creating service engineer.';
+                    }
+                    this.savingTechnician = false;
+                    return;
+                }
+
+                const tech = data.technician;
+                this.technicianList.push(tech);
+                this.selectedTechnicianId = tech.id;
+                this.showTechnicianModal = false;
+                this.successMsg = `Service Engineer "${tech.name}" registered and assigned to this ticket!`;
+            } catch (err) {
+                this.technicianModalError = 'Network error while creating service engineer: ' + err.message;
+            } finally {
+                this.savingTechnician = false;
             }
         }
     };

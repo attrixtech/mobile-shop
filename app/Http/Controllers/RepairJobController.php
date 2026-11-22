@@ -7,11 +7,13 @@ use App\Models\Customer;
 use App\Models\Product;
 use App\Models\RepairJob;
 use App\Models\RepairStatusHistory;
+use App\Models\Tenant;
 use App\Models\User;
 use App\Services\InventoryService;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class RepairJobController extends Controller
 {
@@ -51,9 +53,60 @@ class RepairJobController extends Controller
     {
         $customers = Customer::latest()->get();
         $technicians = User::whereIn('role', ['repair_technician', 'store_manager'])->where('is_active', true)->get();
-        $branchId = session('active_branch_id');
+        $branches = Branch::where('is_active', true)->get();
+        $branchId = session('active_branch_id', auth()->user()?->branch_id) ?: $branches->first()?->id ?? 1;
 
-        return view('repairs.create', compact('customers', 'technicians', 'branchId'));
+        return view('repairs.create', compact('customers', 'technicians', 'branches', 'branchId'));
+    }
+
+    public function storeTechnician(Request $request)
+    {
+        $tenantId = session('active_tenant_id', auth()->user()?->tenant_id) ?? Tenant::first()?->id ?? 1;
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:100',
+            'phone' => 'nullable|string|max:20',
+            'email' => 'nullable|email|max:100',
+            'branch_id' => 'nullable|exists:branches,id',
+            'password' => 'nullable|string|min:6',
+        ]);
+
+        $email = !empty($validated['email']) 
+            ? $validated['email'] 
+            : 'tech.' . strtolower(preg_replace('/[^a-zA-Z0-9]/', '', $validated['name'])) . rand(100, 999) . '@webotapp.com';
+
+        if (User::where('email', $email)->exists()) {
+            $email = 'tech.' . uniqid() . '@webotapp.com';
+        }
+
+        $branchId = $validated['branch_id'] ?? session('active_branch_id', auth()->user()?->branch_id) ?: Branch::first()?->id ?? 1;
+
+        $technician = User::create([
+            'tenant_id' => $tenantId,
+            'name' => $validated['name'],
+            'email' => $email,
+            'phone' => $validated['phone'] ?? null,
+            'role' => 'repair_technician',
+            'branch_id' => $branchId,
+            'password' => Hash::make($validated['password'] ?? 'password123'),
+            'is_active' => true,
+        ]);
+
+        if ($request->expectsJson() || $request->isJson() || $request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Service engineer registered successfully.',
+                'technician' => [
+                    'id' => $technician->id,
+                    'name' => $technician->name,
+                    'phone' => $technician->phone,
+                    'email' => $technician->email,
+                    'role' => 'repair_technician',
+                ]
+            ]);
+        }
+
+        return back()->with('success', "Service engineer {$technician->name} added successfully.");
     }
 
     public function store(Request $request)

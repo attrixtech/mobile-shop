@@ -91,6 +91,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/repairs', [RepairJobController::class, 'index'])->name('repairs.index');
     Route::get('/repairs/create', [RepairJobController::class, 'create'])->name('repairs.create');
     Route::post('/repairs', [RepairJobController::class, 'store'])->name('repairs.store');
+    Route::post('/repairs/technicians', [RepairJobController::class, 'storeTechnician'])->name('repairs.technicians.store');
     Route::get('/repairs/{id}', [RepairJobController::class, 'show'])->name('repairs.show');
     Route::post('/repairs/{id}/status', [RepairJobController::class, 'updateStatus'])->name('repairs.status');
     Route::post('/repairs/{id}/add-item', [RepairJobController::class, 'addItem'])->name('repairs.add-item');
