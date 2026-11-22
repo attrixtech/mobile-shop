@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Point of Sale (POS) - Webotapp Mobile Shop ERP')
+@section('title', 'Point of Sale (POS) - thrumble.mobile-shop')
 
 @section('content')
 <div x-data="posApp()" x-init="init()" class="h-[calc(100vh-5.5rem)] flex flex-col lg:flex-row gap-3">

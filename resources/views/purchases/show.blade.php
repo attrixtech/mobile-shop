@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', "Purchase {$purchase->purchase_number} - Webotapp Mobile Shop ERP")
+@section('title', "Purchase {$purchase->purchase_number} - thrumble.mobile-shop")
 
 @section('content')
 <div class="max-w-4xl mx-auto space-y-4">

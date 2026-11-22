@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'New Repair Job Card - Webotapp Mobile Shop ERP')
+@section('title', 'New Repair Job Card - thrumble.mobile-shop')
 
 @section('content')
 <div class="max-w-3xl mx-auto space-y-4" x-data="repairCreateComponent()">
@@ -297,7 +297,7 @@
                     </div>
                     <div>
                         <label class="block font-semibold text-slate-700 mb-1">Email (Optional)</label>
-                        <input type="email" x-model="newTechnician.email" placeholder="ramesh@webotapp.com" class="w-full px-2.5 py-1.5 rounded bg-slate-50 border border-slate-300 text-xs focus:bg-white focus:outline-none focus:border-indigo-500">
+                        <input type="email" x-model="newTechnician.email" placeholder="ramesh@thrumble.com" class="w-full px-2.5 py-1.5 rounded bg-slate-50 border border-slate-300 text-xs focus:bg-white focus:outline-none focus:border-indigo-500">
                     </div>
                 </div>
 

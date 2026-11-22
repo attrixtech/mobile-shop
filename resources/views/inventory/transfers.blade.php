@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Inter-Branch Stock Transfers - Webotapp Mobile Shop ERP')
+@section('title', 'Inter-Branch Stock Transfers - thrumble.mobile-shop')
 
 @section('content')
 @php

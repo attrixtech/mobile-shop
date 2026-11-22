@@ -64,7 +64,7 @@
                             <td class="py-2 px-3 font-semibold text-slate-800">
                                 {{ $t->name }}
                             </td>
-                            <td class="py-2 px-3 font-mono text-slate-500">{{ $t->subdomain }}.webotapp.com</td>
+                            <td class="py-2 px-3 font-mono text-slate-500">{{ $t->subdomain }}.thrumble.com</td>
                             <td class="py-2 px-3 font-medium text-indigo-600">{{ $t->plan->name ?? 'Free Tier' }}</td>
                             <td class="py-2 px-3 text-center">
                                 @if($t->status === 'active')

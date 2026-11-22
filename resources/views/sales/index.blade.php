@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Sales Invoices - Webotapp Mobile Shop ERP')
+@section('title', 'Sales Invoices - thrumble.mobile-shop')
 
 @section('content')
 <div class="space-y-3">

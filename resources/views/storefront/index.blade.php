@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $company->name ?? 'Webotapp Mobiles' }} - Premier Smartphones, Accessories & Repairs</title>
-    <meta name="description" content="Shop latest smartphones, accessories, and instant device exchanges with certified repair services at {{ $company->name ?? 'Webotapp Mobiles' }} Mumbai.">
+    <title>{{ $company->name ?? 'thrumble.mobile-shop' }} - Premier Smartphones, Accessories & Repairs</title>
+    <meta name="description" content="Shop latest smartphones, accessories, and instant device exchanges with certified repair services at {{ $company->name ?? 'thrumble.mobile-shop' }} Mumbai.">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -42,11 +42,11 @@
             <!-- Brand Logo -->
             <a href="{{ route('shop.index') }}" class="flex items-center gap-3 group shrink-0">
                 <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-700 to-sky-500 text-white flex items-center justify-center font-black text-xl shadow-md shadow-indigo-500/20 group-hover:scale-105 transition-transform shrink-0">
-                    W
+                    T
                 </div>
                 <div>
                     <div class="flex items-center gap-2">
-                        <span class="font-display font-black text-slate-900 text-base sm:text-lg tracking-tight whitespace-nowrap">{{ $company->name ?? 'Webotapp Mobiles' }}</span>
+                        <span class="font-display font-black text-slate-900 text-base sm:text-lg tracking-tight whitespace-nowrap">{{ $company->name ?? 'thrumble.mobile-shop' }}</span>
                         <span class="hidden xl:inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200/80 whitespace-nowrap">
                             <svg class="w-3 h-3 text-emerald-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                             Verified Retailer
@@ -82,7 +82,7 @@
                     @php
                         $cleanPhone = preg_replace('/[^0-9]/', '', $company->phone);
                     @endphp
-                    <a href="https://wa.me/{{ str_starts_with($cleanPhone, '91') ? $cleanPhone : '91'.$cleanPhone }}?text=Hello%20{{ urlencode($company->name ?? 'Webotapp') }},%20I%20am%20interested%20in%20purchasing%20a%20phone%20or%20booking%20a%20repair." target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white text-xs sm:text-sm font-bold shadow-md shadow-emerald-600/20 transition-all hover:shadow-emerald-600/30 whitespace-nowrap shrink-0">
+                    <a href="https://wa.me/{{ str_starts_with($cleanPhone, '91') ? $cleanPhone : '91'.$cleanPhone }}?text=Hello%20{{ urlencode($company->name ?? 'thrumble.mobile-shop') }},%20I%20am%20interested%20in%20purchasing%20a%20phone%20or%20booking%20a%20repair." target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white text-xs sm:text-sm font-bold shadow-md shadow-emerald-600/20 transition-all hover:shadow-emerald-600/30 whitespace-nowrap shrink-0">
                         <span class="relative flex h-2 w-2">
                             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-300 opacity-75"></span>
                             <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-100"></span>
@@ -452,7 +452,7 @@
                         <div class="grid grid-cols-2 gap-2 pt-1">
                             @if($company && $company->phone)
                                 @php
-                                    $inquiryMsg = "Hello " . ($company->name ?? 'Webotapp') . ", I would like to inquire about " . $prod->name . " (Price: Rs " . number_format($prod->selling_price, 2) . ") in-store stock.";
+                                    $inquiryMsg = "Hello " . ($company->name ?? 'thrumble.mobile-shop') . ", I would like to inquire about " . $prod->name . " (Price: Rs " . number_format($prod->selling_price, 2) . ") in-store stock.";
                                 @endphp
                                 <a href="https://wa.me/{{ str_starts_with($cleanPhone, '91') ? $cleanPhone : '91'.$cleanPhone }}?text={{ urlencode($inquiryMsg) }}" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white text-xs font-bold transition shadow-xs">
                                     <svg class="w-3.5 h-3.5 fill-current shrink-0" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.588-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.299.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.353.101.174.45 0.743.966 1.203.664.591 1.224.774 1.397.86.173.087.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.39-.087s1.011.477 1.184.564.289.13.332.202c.043.073.043.419-.101.824z"/></svg>
@@ -549,7 +549,7 @@
                         </div>
 
                         @if($company && $company->phone)
-                            <a href="https://wa.me/{{ str_starts_with($cleanPhone, '91') ? $cleanPhone : '91'.$cleanPhone }}?text=Hello%20Webotapp,%20I%20want%20to%20get%20an%20exchange%20quote%20for%20my%20old%20phone." target="_blank" rel="noopener" class="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-lg shadow-emerald-600/30 transition">
+                            <a href="https://wa.me/{{ str_starts_with($cleanPhone, '91') ? $cleanPhone : '91'.$cleanPhone }}?text=Hello%20{{ urlencode($company->name ?? 'thrumble.mobile-shop') }},%20I%20want%20to%20get%20an%20exchange%20quote%20for%20my%20old%20phone." target="_blank" rel="noopener" class="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-lg shadow-emerald-600/30 transition">
                                 <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.588-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.299.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.353.101.174.45 0.743.966 1.203.664.591 1.224.774 1.397.86.173.087.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.39-.087s1.011.477 1.184.564.289.13.332.202c.043.073.043.419-.101.824z"/></svg>
                                 <span>Get Exchange Quote on WhatsApp</span>
                             </a>
@@ -705,12 +705,12 @@
                 <div class="space-y-3 md:col-span-1">
                     <div class="flex items-center gap-2.5">
                         <div class="w-8 h-8 rounded-lg bg-indigo-600 text-white flex items-center justify-center font-black text-base">
-                            W
+                            T
                         </div>
-                        <span class="font-display font-bold text-white text-base">{{ $company->name ?? 'Webotapp Mobiles' }}</span>
+                        <span class="font-display font-bold text-white text-base">{{ $company->name ?? 'thrumble.mobile-shop' }}</span>
                     </div>
                     <p class="text-[11px] text-slate-400 leading-relaxed">
-                        {{ $company->legal_name ?? 'Webotapp Retail India Pvt Ltd' }}. Premium multi-brand smartphone retail, verified accessories, certified repairs, and smartphone buyback.
+                        {{ $company->legal_name ?? 'thrumble.mobile-shop Retail India Pvt Ltd' }}. Premium multi-brand smartphone retail, verified accessories, certified repairs, and smartphone buyback.
                     </p>
                     <div class="text-[10px] text-slate-500 font-mono">
                         GSTIN: {{ $company->gstin ?? '27AABCU9603R1ZM' }}
@@ -757,8 +757,14 @@
             </div>
 
             <div class="mt-10 pt-6 border-t border-slate-900 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-slate-400">
-                <p>&copy; {{ date('Y') }} {{ $company->name ?? 'Webotapp' }}. All rights reserved.</p>
-                <p class="text-slate-400">Engineered with Webotapp Mobile Shop Cloud ERP</p>
+                <p>&copy; {{ date('Y') }} {{ $company->name ?? 'thrumble.mobile-shop' }}. All rights reserved.</p>
+                <p class="text-slate-400 text-center sm:text-right">
+                    Powered by <span class="text-slate-200 font-semibold">thrumble.mobile-shop</span>
+                    &bull;
+                    Developed by <a href="https://www.attrixtech.com" target="_blank" rel="noopener" class="text-indigo-400 hover:text-indigo-300 transition">Attrix Technologies</a>
+                    &bull;
+                    Marketed by <a href="https://www.infusionn.in" target="_blank" rel="noopener" class="text-indigo-400 hover:text-indigo-300 transition">Infusionn Pvt. Ltd.</a>
+                </p>
             </div>
         </div>
     </footer>

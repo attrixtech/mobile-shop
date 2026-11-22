@@ -58,7 +58,7 @@
         <table>
             <tr>
                 <td style="width: 55%; vertical-align: top;" class="p-2">
-                    <div class="font-bold uppercase" style="font-size: 13px; color: #0f172a;">{{ $company->legal_name ?? $company->name ?? 'Webotapp Retail India Pvt Ltd' }}</div>
+                    <div class="font-bold uppercase" style="font-size: 13px; color: #0f172a;">{{ $company->legal_name ?? $company->name ?? 'thrumble.mobile-shop Retail India Pvt Ltd' }}</div>
                     <div style="color: #475569;">{{ $sale->branch?->address }}</div>
                     <div style="color: #475569;">{{ $sale->branch?->city }}, {{ $sale->branch?->state }} - {{ $sale->branch?->pincode }}</div>
                     <div style="margin-top: 4px;"><strong>GSTIN:</strong> {{ $company->gstin ?? '27AABCU9603R1ZM' }} | <strong>PAN:</strong> {{ $company->pan ?? 'AABCU9603R' }}</div>
@@ -153,7 +153,7 @@
                     <div style="font-size: 9px; color: #475569; border-top: 1px solid #e2e8f0; padding-top: 6px;">
                         <strong>Bank Transfer Details for Direct Payment:</strong><br>
                         Bank: HDFC Bank Ltd | A/C No: 50200088991122 | IFSC: HDFC0000128<br>
-                        UPI ID: webotappretail@hdfcbank
+                        UPI ID: thrumble.mobileshop@hdfcbank
                     </div>
                 </td>
                 <td style="width: 40%; vertical-align: top;" class="p-2 bg-gray">
@@ -188,7 +188,7 @@
                     4. Disputes subject to Mumbai jurisdiction only.
                 </td>
                 <td style="width: 35%; text-align: center; vertical-align: bottom; height: 75px;" class="p-2">
-                    <div style="font-size: 9px; margin-bottom: 35px;">For {{ $company->legal_name ?? 'Webotapp Retail India Pvt Ltd' }}</div>
+                    <div style="font-size: 9px; margin-bottom: 35px;">For {{ $company->legal_name ?? 'thrumble.mobile-shop Retail India Pvt Ltd' }}</div>
                     <div class="font-bold" style="border-top: 1px solid #000; padding-top: 2px; font-size: 10px;">Authorized Signatory</div>
                 </td>
             </tr>

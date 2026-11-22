@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $product->name }} - {{ $company->name ?? 'Webotapp Mobiles' }}</title>
+    <title>{{ $product->name }} - {{ $company->name ?? 'thrumble.mobile-shop' }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,10 +27,10 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
             <a href="{{ route('shop.index') }}" class="flex items-center gap-3 group shrink-0">
                 <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-sky-500 text-white flex items-center justify-center font-black text-xl shadow-md shadow-indigo-500/20 group-hover:scale-105 transition-transform shrink-0">
-                    W
+                    T
                 </div>
                 <div>
-                    <h1 class="font-display font-extrabold text-slate-900 text-base leading-tight whitespace-nowrap">{{ $company->name ?? 'Webotapp Mobiles' }}</h1>
+                    <h1 class="font-display font-extrabold text-slate-900 text-base leading-tight whitespace-nowrap">{{ $company->name ?? 'thrumble.mobile-shop' }}</h1>
                     <p class="text-[11px] text-indigo-600 font-semibold flex items-center gap-1 whitespace-nowrap">
                         &larr; Back to Shop Catalog
                     </p>
@@ -140,9 +140,16 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-slate-950 text-slate-400 py-8 text-center text-xs mt-12 border-t border-slate-900">
-        <p>&copy; {{ date('Y') }} {{ $company->name ?? 'Webotapp' }}. All rights reserved.</p>
-        <p class="text-[11px] text-slate-500 mt-1">Store Locations: Andheri West Mega Store &amp; Bandra Retail Hub &bull; Mumbai</p>
+    <footer class="bg-slate-950 text-slate-400 py-8 text-center text-xs mt-12 border-t border-slate-900 space-y-1.5">
+        <p>&copy; {{ date('Y') }} {{ $company->name ?? 'thrumble.mobile-shop' }}. All rights reserved.</p>
+        <p class="text-[11px] text-slate-500">Store Locations: Andheri West Mega Store &amp; Bandra Retail Hub &bull; Mumbai</p>
+        <p class="text-[11px] text-slate-500">
+            Powered by <span class="text-slate-300 font-semibold">thrumble.mobile-shop</span>
+            &bull;
+            Developed by <a href="https://www.attrixtech.com" target="_blank" rel="noopener" class="text-indigo-400 hover:text-indigo-300 transition">Attrix Technologies</a>
+            &bull;
+            Marketed by <a href="https://www.infusionn.in" target="_blank" rel="noopener" class="text-indigo-400 hover:text-indigo-300 transition">Infusionn Pvt. Ltd.</a>
+        </p>
     </footer>
 
 </body>

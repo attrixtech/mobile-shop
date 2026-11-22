@@ -21,7 +21,7 @@
             </div>
             <div>
                 <label class="form-label text-xs font-semibold text-slate-700">Legal Registered Name</label>
-                <input type="text" name="legal_name" class="form-input text-xs" value="{{ old('legal_name', $company->legal_name ?? '') }}" placeholder="e.g. Webotapp Retail LLP">
+                <input type="text" name="legal_name" class="form-input text-xs" value="{{ old('legal_name', $company->legal_name ?? '') }}" placeholder="e.g. thrumble.mobile-shop Retail LLP">
             </div>
         </div>
 

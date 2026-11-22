@@ -42,7 +42,7 @@
 
     <!-- Store Header -->
     <div class="text-center">
-        <div class="font-bold" style="font-size: 14px;">{{ $company->name ?? 'WEBOTAPP MOBILES' }}</div>
+        <div class="font-bold" style="font-size: 14px;">{{ $company->name ?? 'THRUMBLE.MOBILE-SHOP' }}</div>
         <div>{{ $sale->branch?->name }}</div>
         <div>{{ $sale->branch?->address }}</div>
         <div>{{ $sale->branch?->city }}, {{ $sale->branch?->state }}</div>
@@ -133,7 +133,7 @@
         <p>Manufacturer Warranty applies as per brand policy.</p>
         <p>Keep invoice & original box for warranty claims.</p>
         <p class="font-bold">THANK YOU FOR YOUR PURCHASE!</p>
-        <p style="font-size: 8px;">Powered by Webotapp Mobile Shop ERP</p>
+        <p style="font-size: 8px;">Powered by thrumble.mobile-shop</p>
     </div>
 
 </body>

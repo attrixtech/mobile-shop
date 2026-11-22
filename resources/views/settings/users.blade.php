@@ -25,7 +25,7 @@
                 </div>
                 <div>
                     <label class="form-label text-xs font-semibold text-slate-700">Email Address *</label>
-                    <input type="email" name="email" class="form-input text-xs" required placeholder="user@webotapp.com" value="{{ old('email') }}">
+                    <input type="email" name="email" class="form-input text-xs" required placeholder="user@thrumble.com" value="{{ old('email') }}">
                     @error('email')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
                 </div>
                 <div>

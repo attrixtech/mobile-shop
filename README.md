@@ -1,4 +1,4 @@
-# Mobile Shop and Repair Center Software
+# thrumble.mobile-shop
 
 [![Laravel](https://img.shields.io/badge/Laravel-13-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)](https://laravel.com)
 [![PHP](https://img.shields.io/badge/PHP-8.4-777BB4?style=for-the-badge&logo=php&logoColor=white)](https://php.net)
@@ -7,7 +7,7 @@
 [![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?style=for-the-badge&logo=mysql&logoColor=white)](https://mysql.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
 
-A complete, production-grade, multi-tenant **Mobile Shop Management & Repair Center ERP** engineered for smartphone retail stores, multi-branch electronics chains, and device service labs.
+**thrumble.mobile-shop** is a complete, production-grade, multi-tenant **Mobile Shop Management & Repair Center ERP** engineered for smartphone retail stores, multi-branch electronics chains, and device service labs.
 
 Built with a **high-density, compact POS layout**, instant barcode/IMEI scanning, automated device trade-in valuations, certified repair job ticketing, Indian GST compliance (HSN codes, GSTR-1), double-entry accounting, and a modern customer-facing storefront with WhatsApp ordering.
 
@@ -51,8 +51,8 @@ Ensure your environment has:
 
 ### 2. Clone Repository
 ```bash
-git clone https://github.com/webotapp-academy/mobile-shop-and-repair-center-software.git
-cd mobile-shop-and-repair-center-software
+git clone <repository-url>
+cd mobile-shop
 ```
 
 ### 3. Install Dependencies
@@ -73,11 +73,11 @@ Configure your database credentials in `.env`:
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=mobileshop_erp
+DB_DATABASE=thrumble_mobile_shop
 DB_USERNAME=root
 DB_PASSWORD=
 # If using a custom socket (such as XAMPP/MariaDB):
-# DB_SOCKET=/Users/pabanbhuyanmacmini/.local/share/webotapp/mysql.sock
+# DB_SOCKET=/path/to/mysql.sock
 ```
 
 ### 5. Database Migrations & Seeding
@@ -117,11 +117,11 @@ All demo accounts use the default password: `password123`
 
 | Role | Email | Password | Access Scope |
 |---|---|---|---|
-| **SaaS Super Admin** | `superadmin@webotapp.com` | `password123` | Multi-tenant platform dashboard, tenant plans, usage limits |
-| **Store Owner** | `owner@webotapp.com` | `password123` | Full access across all store branches, accounting, P&L, settings |
-| **Store Manager** | `manager@webotapp.com` | `password123` | Branch management, purchases, inventory, sales, team members |
-| **Cashier / POS** | `sales@webotapp.com` | `password123` | POS billing, returns, customer lookup, cash drawer register |
-| **Repair Technician** | `tech@webotapp.com` | `password123` | Repair job cards, diagnostics, spare parts, ticket updates |
+| **SaaS Super Admin** | `superadmin@thrumble.com` | `password123` | Multi-tenant platform dashboard, tenant plans, usage limits |
+| **Store Owner** | `owner@thrumble.com` | `password123` | Full access across all store branches, accounting, P&L, settings |
+| **Store Manager** | `manager@thrumble.com` | `password123` | Branch management, purchases, inventory, sales, team members |
+| **Cashier / POS** | `sales@thrumble.com` | `password123` | POS billing, returns, customer lookup, cash drawer register |
+| **Repair Technician** | `tech@thrumble.com` | `password123` | Repair job cards, diagnostics, spare parts, ticket updates |
 
 ---
 
@@ -191,8 +191,15 @@ All demo accounts use the default password: `password123`
 
 ---
 
+## 🤝 Credits
+
+- **Development:** [Attrix Technologies](https://www.attrixtech.com)
+- **Marketing:** [Infusionn Pvt. Ltd.](https://www.infusionn.in)
+
+---
+
 ## 📄 License
 
 This software is released under the [MIT License](LICENSE).
 
-Copyright (c) 2026 Webotapp Academy.
+Copyright (c) 2026 thrumble.mobile-shop (Attrix Technologies).

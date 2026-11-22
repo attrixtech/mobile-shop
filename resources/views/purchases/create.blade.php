@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'New Purchase & GRN - Webotapp Mobile Shop ERP')
+@section('title', 'New Purchase & GRN - thrumble.mobile-shop')
 
 @section('content')
 <div class="max-w-5xl mx-auto space-y-4" x-data="purchaseForm()">

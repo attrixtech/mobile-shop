@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'IMEI Registry & Serial Tracking - Webotapp Mobile Shop ERP')
+@section('title', 'IMEI Registry & Serial Tracking - thrumble.mobile-shop')
 
 @section('content')
 <div class="space-y-3" x-data="{ addModal: false, statusModal: false, selectedImei: null }">

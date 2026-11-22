@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'Webotapp Mobile Shop ERP')</title>
+    <title>@yield('title', 'thrumble.mobile-shop')</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,8 +27,8 @@
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                 </button>
                 <a href="{{ route('dashboard') }}" class="flex items-center space-x-2">
-                    <div class="w-7 h-7 rounded bg-indigo-600 flex items-center justify-center font-bold text-white text-sm">W</div>
-                    <span class="font-bold tracking-tight text-white text-sm sm:text-base">Webotapp <span class="text-indigo-400 text-xs px-1.5 py-0.5 rounded bg-indigo-950 font-normal border border-indigo-800">Mobile ERP</span></span>
+                    <div class="w-7 h-7 rounded bg-indigo-600 flex items-center justify-center font-bold text-white text-sm">T</div>
+                    <span class="font-bold tracking-tight text-white text-sm sm:text-base">thrumble<span class="text-indigo-400">.mobile-shop</span></span>
                 </a>
             </div>
 
@@ -219,10 +219,14 @@
                 </a>
             </div>
 
-            <div class="p-3 bg-slate-950 border-t border-slate-800 text-[11px] text-slate-400">
+            <div class="p-3 bg-slate-950 border-t border-slate-800 text-[11px] text-slate-400 space-y-1.5">
                 <div class="flex items-center justify-between">
-                    <span>Webotapp v2.4</span>
+                    <span class="font-medium text-slate-300">thrumble.mobile-shop</span>
                     <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium bg-emerald-950 text-emerald-400 border border-emerald-800">Production</span>
+                </div>
+                <div class="text-[10px] text-slate-500 leading-snug pt-1 border-t border-slate-800/80">
+                    <div>Dev: <a href="https://www.attrixtech.com" target="_blank" rel="noopener" class="text-slate-400 hover:text-indigo-400 transition">Attrix Technologies</a></div>
+                    <div>Mktg: <a href="https://www.infusionn.in" target="_blank" rel="noopener" class="text-slate-400 hover:text-indigo-400 transition">Infusionn Pvt. Ltd.</a></div>
                 </div>
             </div>
         </aside>

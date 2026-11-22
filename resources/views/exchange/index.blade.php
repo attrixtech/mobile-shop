@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Mobile Exchange & Used Phones - Webotapp Mobile Shop ERP')
+@section('title', 'Mobile Exchange & Used Phones - thrumble.mobile-shop')
 
 @section('content')
 <div class="space-y-4" x-data="{ tab: 'used_inventory', statusModal: false, selectedDevice: null }">

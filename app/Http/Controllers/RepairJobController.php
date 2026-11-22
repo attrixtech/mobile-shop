@@ -73,10 +73,10 @@ class RepairJobController extends Controller
 
         $email = !empty($validated['email']) 
             ? $validated['email'] 
-            : 'tech.' . strtolower(preg_replace('/[^a-zA-Z0-9]/', '', $validated['name'])) . rand(100, 999) . '@webotapp.com';
+            : 'tech.' . strtolower(preg_replace('/[^a-zA-Z0-9]/', '', $validated['name'])) . rand(100, 999) . '@thrumble.com';
 
         if (User::where('email', $email)->exists()) {
-            $email = 'tech.' . uniqid() . '@webotapp.com';
+            $email = 'tech.' . uniqid() . '@thrumble.com';
         }
 
         $branchId = $validated['branch_id'] ?? session('active_branch_id', auth()->user()?->branch_id) ?: Branch::first()?->id ?? 1;

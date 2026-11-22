@@ -31,7 +31,7 @@
         <!-- Header -->
         <div class="p-2 border" style="border-bottom: 1px solid #cbd5e1; text-align: center; background: #f8fafc;">
             <h2 style="margin: 0; font-size: 16px; text-transform: uppercase;">DEVICE REPAIR JOB CARD</h2>
-            <div style="font-size: 12px; font-weight: bold; margin-top: 3px;">{{ $job->branch?->company?->name ?? 'Webotapp Mobile Repair Center' }}</div>
+            <div style="font-size: 12px; font-weight: bold; margin-top: 3px;">{{ $job->branch?->company?->name ?? 'thrumble.mobile-shop Repair Center' }}</div>
             <div style="font-size: 10px; color: #64748b;">{{ $job->branch?->address }} | Phone: {{ $job->branch?->phone }}</div>
         </div>
 

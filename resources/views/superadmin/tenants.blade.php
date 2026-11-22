@@ -38,7 +38,7 @@
                             <div class="font-bold text-slate-800">{{ $t->name }}</div>
                             <span class="text-[10px] text-slate-400">Created {{ $t->created_at->format('d M Y') }}</span>
                         </td>
-                        <td class="py-2.5 px-3 font-mono text-indigo-600">{{ $t->subdomain }}.webotapp.com</td>
+                        <td class="py-2.5 px-3 font-mono text-indigo-600">{{ $t->subdomain }}.thrumble.com</td>
                         <td class="py-2.5 px-3">
                             <form method="POST" action="{{ route('superadmin.tenants.status', $t->id) }}" class="flex items-center gap-1">
                                 @csrf

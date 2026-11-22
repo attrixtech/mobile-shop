@@ -1,5 +1,5 @@
 # MASTER SOFTWARE DEVELOPMENT PROMPT
-# Mobile Shop Management ERP – Webotapp
+# Mobile Shop Management ERP – thrumble.mobile-shop
 The design should be compact
 ## 1. Project Overview
 
@@ -16,7 +16,7 @@ The system must be suitable for:
 - Wholesale and retail mobile distributors.
 - Multi-branch electronics businesses.
 
-The software must be designed as a commercial SaaS product under the brand **Webotapp Mobile Shop ERP**.
+The software must be designed as a commercial SaaS product under the brand **thrumble.mobile-shop**.
 
 Do not build a simple billing application. Build a comprehensive retail management platform with real operational workflows.
 

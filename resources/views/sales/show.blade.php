@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', "Invoice {$sale->invoice_number} - Webotapp Mobile Shop ERP")
+@section('title', "Invoice {$sale->invoice_number} - thrumble.mobile-shop")
 
 @section('content')
 <div class="max-w-4xl mx-auto space-y-4">
@@ -37,7 +37,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
         <div class="bg-white p-3 rounded border border-slate-200 shadow-sm space-y-1">
             <h3 class="font-bold text-slate-800 uppercase tracking-wider text-[11px]">Billed By (Seller)</h3>
-            <div class="font-semibold text-slate-900">{{ $company->name ?? 'Webotapp Retail' }}</div>
+            <div class="font-semibold text-slate-900">{{ $company->name ?? 'thrumble.mobile-shop' }}</div>
             <div class="text-slate-500">GSTIN: <span class="font-mono text-slate-800 font-medium">{{ $company->gstin ?? 'N/A' }}</span></div>
             <div class="text-slate-500">{{ $sale->branch?->address }}</div>
             <div class="text-slate-500">{{ $sale->branch?->city }}, {{ $sale->branch?->state }} - {{ $sale->branch?->pincode }}</div>

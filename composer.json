@@ -1,9 +1,9 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "laravel/laravel",
+    "name": "thrumble/mobile-shop",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
+    "description": "thrumble.mobile-shop — Multi-tenant Mobile Shop Management & Repair Center ERP.",
+    "keywords": ["thrumble.mobile-shop", "mobile-shop", "erp", "pos", "laravel"],
     "license": "MIT",
     "require": {
         "php": "^8.3",

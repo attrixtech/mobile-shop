@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'IMEI Warranty Registry - Webotapp Mobile Shop ERP')
+@section('title', 'IMEI Warranty Registry - thrumble.mobile-shop')
 
 @section('content')
 <div class="space-y-4">

@@ -1,8 +1,10 @@
-# Webotapp Mobile Shop ERP – Development Progress Report
+# thrumble.mobile-shop – Development Progress Report
 
-**Application Name:** Webotapp Mobile Shop ERP  
+**Application Name:** thrumble.mobile-shop  
 **Architecture:** Multi-Tenant SaaS, Compact High-Density Retail UI  
 **Tech Stack:** PHP 8.4 CLI, Laravel 13, MySQL / MariaDB 10.4, Tailwind CSS v4, Alpine.js, Chart.js  
+**Developed By:** [Attrix Technologies](https://www.attrixtech.com)  
+**Marketed By:** [Infusionn Pvt. Ltd.](https://www.infusionn.in)  
 **Last Updated:** November 2026  
 **Status:** **Phase 1 to Phase 9 Completed – 100% Core Requirements Implemented & Verified**
 
@@ -10,7 +12,7 @@
 
 ## 1. Executive Summary
 
-Webotapp Mobile Shop ERP is an enterprise-grade, multi-tenant SaaS application purpose-built for Indian smartphone dealers, electronics retailers, and mobile service centers. Designed with a **compact, high-density layout**, it enables rapid cashier checkout, end-to-end 15-digit primary & secondary IMEI tracking, GST compliance (CGST/SGST/IGST), double-entry balanced accounting, mobile trade-in diagnostic grading, service center job-card workflows, inter-branch inventory transfers, and an online public storefront with WhatsApp ordering.
+thrumble.mobile-shop is an enterprise-grade, multi-tenant SaaS application purpose-built for Indian smartphone dealers, electronics retailers, and mobile service centers. Designed with a **compact, high-density layout**, it enables rapid cashier checkout, end-to-end 15-digit primary & secondary IMEI tracking, GST compliance (CGST/SGST/IGST), double-entry balanced accounting, mobile trade-in diagnostic grading, service center job-card workflows, inter-branch inventory transfers, and an online public storefront with WhatsApp ordering.
 
 ---
 
@@ -101,8 +103,8 @@ Duration: 0.39s
 ## 5. Seeded Demo Accounts & Verification
 
 The database seeder (`database/seeders/DatabaseSeeder.php`) populates realistic test data:
-- **Platform Super Admin:** `superadmin@webotapp.com` / `password123`
-- **Store Owner:** `owner@webotapp.com` / `password123`
-- **Store Manager:** `manager@webotapp.com` / `password123`
-- **Cashier / POS Operator:** `sales@webotapp.com` / `password123`
-- **Repair Technician:** `tech@webotapp.com` / `password123`
+- **Platform Super Admin:** `superadmin@thrumble.com` / `password123`
+- **Store Owner:** `owner@thrumble.com` / `password123`
+- **Store Manager:** `manager@thrumble.com` / `password123`
+- **Cashier / POS Operator:** `sales@thrumble.com` / `password123`
+- **Repair Technician:** `tech@thrumble.com` / `password123`

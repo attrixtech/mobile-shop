@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', "Repair Job {$job->job_number} - Webotapp Mobile Shop ERP")
+@section('title', "Repair Job {$job->job_number} - thrumble.mobile-shop")
 
 @section('content')
 <div class="max-w-4xl mx-auto space-y-4">
