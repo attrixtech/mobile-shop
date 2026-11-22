@@ -1,0 +1,1599 @@
+# MASTER SOFTWARE DEVELOPMENT PROMPT
+# Mobile Shop Management ERP – Webotapp
+The design should be compact
+## 1. Project Overview
+
+Build a complete, production-ready, multi-tenant Mobile Shop Management ERP for Indian mobile phone retailers, smartphone dealers, electronics stores, mobile repair shops, and multi-branch retail businesses.
+
+The application must manage the complete lifecycle of a mobile retail business, starting from purchasing smartphones from distributors to inventory management, IMEI tracking, sales, GST invoicing, customer management, repair services, warranty tracking, exchanges, accessories sales, payments, accounting, and business analytics.
+
+The system must be suitable for:
+- Small independent mobile shops.
+- Multi-brand mobile retail stores.
+- Authorized mobile phone dealerships.
+- Smartphone and accessories retailers.
+- Mobile repair and service centers.
+- Wholesale and retail mobile distributors.
+- Multi-branch electronics businesses.
+
+The software must be designed as a commercial SaaS product under the brand **Webotapp Mobile Shop ERP**.
+
+Do not build a simple billing application. Build a comprehensive retail management platform with real operational workflows.
+
+---
+
+## 2. Technology Stack
+
+Use the following technologies:
+
+### Backend
+- PHP 8.2+
+- Latest stable Laravel version compatible with the installed PHP environment.
+- Laravel Eloquent ORM.
+- Laravel Sanctum for API authentication.
+- Laravel queues for background operations.
+- Laravel Scheduler for automated tasks.
+- REST API architecture.
+
+### Frontend
+- Blade templates with Livewire or a clean Laravel-compatible frontend architecture.
+- Tailwind CSS.
+- Alpine.js where required.
+- Responsive design.
+- AJAX-based interactions where appropriate.
+
+### Database
+- MySQL 8+.
+- Proper relational database structure.
+- Foreign key constraints.
+- Database indexing.
+- Transactions for financial and inventory operations.
+- Decimal precision for monetary values.
+
+### Other Integrations
+- Razorpay payment gateway (optional).
+- UPI payment recording.
+- SMS gateway integration.
+- WhatsApp Business API integration.
+- Email notifications.
+- Barcode and QR code generation.
+- PDF invoice generation.
+- Thermal printer support.
+- Excel and CSV import/export.
+
+Keep integrations modular so that the business can configure them later.
+
+---
+
+## 3. Multi-Tenant SaaS Architecture
+
+The system must support multiple independent mobile shop businesses using one application.
+
+Each business must have:
+- Company profile.
+- GSTIN.
+- Business address.
+- Contact details.
+- Logo.
+- Invoice configuration.
+- Branches.
+- Employees.
+- Suppliers.
+- Customers.
+- Products.
+- Inventory.
+- Financial records.
+- Subscription plan.
+
+Implement tenant-level data isolation.
+
+One business must never access another business's:
+- Customers.
+- Products.
+- Stock.
+- IMEI records.
+- Invoices.
+- Purchases.
+- Employees.
+- Financial information.
+
+Use a shared database with tenant_id or an equivalent properly implemented tenancy architecture.
+
+Every tenant-owned record must be scoped securely.
+
+Create a platform super-admin who can manage tenants, subscriptions, plans, usage, and platform configuration.
+
+---
+
+# 4. USER ROLES & PERMISSIONS
+
+Implement role-based access control.
+
+### Platform Roles
+1. Super Admin.
+2. Platform Support Administrator.
+
+### Business Roles
+1. Business Owner.
+2. Super Admin.
+3. Branch Manager.
+4. Store Manager.
+5. Sales Executive.
+6. Cashier.
+7. Inventory Manager.
+8. Accountant.
+9. Purchase Manager.
+10. Repair Technician.
+
+Permissions must be configurable.
+
+Examples:
+- Cashier can create sales but cannot delete posted invoices.
+- Sales executives can create reservations and sales.
+- Inventory managers can manage stock but cannot access confidential financial reports.
+- Accountants can manage payments, expenses and reports.
+- Branch managers can access their assigned branch.
+- Business owners can access all authorized business branches.
+
+Maintain a complete activity log of sensitive actions.
+
+---
+
+# 5. MAIN DASHBOARD
+
+Create a professional dashboard with:
+
+### Business Overview
+- Today's sales.
+- Today's purchases.
+- Total revenue.
+- Gross profit.
+- Net profit estimate.
+- Outstanding customer payments.
+- Supplier outstanding payments.
+- Total inventory value.
+- Total active products.
+- Total smartphones in stock.
+- Total accessories in stock.
+- Today's expenses.
+
+### Mobile Inventory Overview
+- Total smartphone units.
+- Total units sold.
+- Available units.
+- Reserved units.
+- Damaged units.
+- Under-repair units.
+- Warranty-expiring devices.
+
+### IMEI Overview
+- Total registered IMEIs.
+- IMEIs currently in stock.
+- IMEIs sold.
+- IMEIs reserved.
+- IMEIs under repair.
+- Duplicate IMEI alerts.
+
+### Alerts
+- Low-stock products.
+- Out-of-stock products.
+- Warranty expiry.
+- Pending customer payments.
+- Supplier payment deadlines.
+- Pending repairs.
+- Pending purchase orders.
+- Daily cash mismatch.
+
+Include charts for:
+- Daily sales.
+- Monthly sales.
+- Category-wise revenue.
+- Brand-wise sales.
+- Payment-method distribution.
+- Profitability.
+- Top-selling products.
+- Branch-wise performance.
+
+All dashboard figures must come from actual database records.
+
+---
+
+# 6. PRODUCT & CATALOG MANAGEMENT
+
+Create a comprehensive product management module.
+
+### Product Categories
+Examples:
+- Smartphones.
+- Feature Phones.
+- Tablets.
+- Smartwatches.
+- Bluetooth Earphones.
+- Headphones.
+- Chargers.
+- USB Cables.
+- Power Banks.
+- Phone Covers.
+- Screen Protectors.
+- Speakers.
+- Memory Cards.
+- Computer Accessories.
+- Other Electronics.
+
+Allow custom categories and subcategories.
+
+### Product Information
+
+Each product should support:
+
+- Product name.
+- SKU.
+- Barcode.
+- Brand.
+- Model.
+- Category.
+- Subcategory.
+- Product description.
+- Product image.
+- Purchase price.
+- Selling price.
+- MRP.
+- Wholesale price.
+- GST tax category.
+- HSN code.
+- Minimum stock level.
+- Reorder quantity.
+- Product status.
+- Warranty duration.
+- Unit of measurement.
+
+### Smartphone-Specific Fields
+
+For smartphone products, capture:
+- Brand.
+- Model.
+- RAM.
+- Internal storage.
+- Colour.
+- Display size.
+- Processor.
+- Operating system.
+- Battery capacity.
+- Network compatibility.
+- Manufacturer warranty duration.
+
+A product model can have multiple variants.
+
+Example:
+
+Samsung Galaxy S Series:
+- 8GB RAM / 128GB / Black.
+- 8GB RAM / 256GB / Blue.
+- 12GB RAM / 256GB / Silver.
+
+Each variant must maintain independent stock.
+
+### Product Types
+
+Support:
+1. Serialized products – smartphones, tablets and other devices with unique serial numbers.
+2. Non-serialized products – covers, chargers, cables and accessories.
+3. Service products – screen replacement, software installation and repair services.
+4. Bundled products – phone plus accessories packages.
+
+---
+
+# 7. IMEI & SERIAL NUMBER MANAGEMENT
+
+This is one of the most important modules.
+
+Implement complete IMEI tracking.
+
+Every smartphone unit must have its own unique inventory identity.
+
+### IMEI Fields
+- IMEI 1.
+- IMEI 2 (for dual-SIM devices).
+- Serial number.
+- Product ID.
+- Product variant.
+- Purchase invoice reference.
+- Supplier.
+- Purchase date.
+- Purchase cost.
+- Branch.
+- Stock status.
+- Warranty start date.
+- Warranty end date.
+- Sale invoice reference.
+- Customer reference.
+
+### IMEI Status
+- In Stock.
+- Reserved.
+- Sold.
+- Returned.
+- Under Repair.
+- Damaged.
+- Transferred.
+- Written Off.
+
+### IMEI Search
+
+Allow searching by:
+- IMEI 1.
+- IMEI 2.
+- Serial number.
+- Barcode.
+- Product name.
+- Model number.
+
+### IMEI Validation
+
+Implement:
+- Duplicate IMEI detection.
+- Unique IMEI constraints.
+- Validation during purchase entry.
+- Validation during sales.
+- Validation during returns.
+- Complete IMEI history.
+
+The system must prevent the same IMEI from being sold twice.
+
+### IMEI Lifecycle
+
+Maintain an audit trail:
+
+Purchase → Stock Received → Branch Transfer → Reservation → Sale → Customer Assignment → Warranty → Return/Repair (if applicable).
+
+Every lifecycle event must record date, user, branch and transaction reference.
+
+Do not allow users to edit IMEI history by directly modifying a sold device's original purchase record.
+
+---
+
+# 8. PURCHASE & SUPPLIER MANAGEMENT
+
+Create a complete purchasing module.
+
+### Supplier Management
+- Supplier name.
+- Business name.
+- GSTIN.
+- Contact person.
+- Mobile number.
+- Email.
+- Address.
+- State.
+- PIN code.
+- Opening balance.
+- Payment terms.
+- Bank information.
+- Supplier status.
+
+### Purchase Workflow
+
+Purchase Order → Goods Receipt → Purchase Invoice → Stock Update → Supplier Payment.
+
+### Purchase Order
+- Create purchase orders.
+- Add products and quantities.
+- Add expected rates.
+- Add tax.
+- Add discounts.
+- Add delivery dates.
+- Track order status.
+
+### Goods Receipt Note (GRN)
+- Receive purchased products.
+- Enter IMEI details for serialized devices.
+- Record received quantity.
+- Record damaged quantity.
+- Record shortages.
+- Verify supplier invoice.
+- Update inventory only for accepted stock.
+
+### Purchase Invoice
+- Supplier invoice number.
+- Purchase date.
+- Products.
+- IMEI details.
+- Tax.
+- Discounts.
+- Freight and other charges.
+- Total amount.
+- Paid amount.
+- Outstanding amount.
+
+### Supplier Payments
+- Cash.
+- Bank transfer.
+- UPI.
+- Cheque.
+- NEFT/RTGS.
+- Other methods.
+
+Support partial payments and supplier credit.
+
+---
+
+# 9. INVENTORY & STOCK MANAGEMENT
+
+Implement real-time inventory management.
+
+### Stock Operations
+- Opening stock.
+- Purchase stock.
+- Sales stock.
+- Sales returns.
+- Purchase returns.
+- Branch transfers.
+- Stock adjustments.
+- Damaged stock.
+- Lost stock.
+- Stock write-offs.
+
+### Inventory Features
+- Branch-wise stock.
+- Product-wise stock.
+- Variant-wise stock.
+- IMEI-wise stock.
+- Stock valuation.
+- Stock movement history.
+- Low-stock alerts.
+- Reorder suggestions.
+- Inventory adjustment approvals.
+
+### Stock Transfer
+
+Allow transferring stock between branches.
+
+Workflow:
+1. Create transfer request.
+2. Select source branch.
+3. Select destination branch.
+4. Add products and serialized devices.
+5. Approve transfer.
+6. Dispatch stock.
+7. Receive stock.
+8. Confirm quantity and IMEI.
+9. Update stock balances.
+
+Maintain complete transfer history.
+
+Never allow stock to become negative unless an explicitly authorized configuration permits it.
+
+---
+
+# 10. POS & SALES MANAGEMENT
+
+Create a fast, user-friendly Point of Sale interface.
+
+The POS must be optimized for touchscreen, desktop and tablet use.
+
+### POS Screen
+
+Display:
+- Product search.
+- Barcode scanner input.
+- Product categories.
+- Product grid.
+- Shopping cart.
+- Quantity controls.
+- Discounts.
+- Tax calculation.
+- Customer selection.
+- Payment section.
+- Invoice preview.
+
+### Sales Workflow
+
+1. Select customer or walk-in customer.
+2. Scan barcode or search product.
+3. Select smartphone variant.
+4. Select available IMEI.
+5. Add accessories and services.
+6. Apply permitted discount.
+7. Calculate GST.
+8. Select payment method.
+9. Complete payment.
+10. Generate invoice.
+11. Reduce stock.
+12. Update IMEI status to Sold.
+13. Create customer warranty record.
+
+### Multiple Payment Methods
+
+Allow a single invoice to be paid using multiple methods.
+
+Example:
+- ₹20,000 UPI.
+- ₹10,000 Cash.
+- ₹5,000 Card.
+
+### Sales Types
+- Retail sale.
+- Wholesale sale.
+- Corporate sale.
+- Online order.
+- Advance booking.
+- Exchange sale.
+
+### Sales Returns
+
+Support:
+- Full returns.
+- Partial returns.
+- Refunds.
+- Exchange against another product.
+- Return to inventory after inspection.
+
+For smartphone returns, verify the original IMEI and invoice.
+
+Do not automatically restore a returned device to sellable inventory until it has passed inspection.
+
+---
+
+# 11. MOBILE EXCHANGE & BUYBACK MANAGEMENT
+
+Build a dedicated mobile exchange module.
+
+Customers should be able to exchange their old smartphones when purchasing a new device.
+
+### Exchange Information
+- Customer.
+- Old phone brand.
+- Old phone model.
+- IMEI.
+- Serial number.
+- Device condition.
+- Screen condition.
+- Battery condition.
+- Body condition.
+- Functional condition.
+- Accessories received.
+- Inspection notes.
+- Estimated exchange value.
+- Final approved value.
+- Evaluating employee.
+
+### Exchange Workflow
+
+1. Select customer.
+2. Enter old device information.
+3. Perform inspection.
+4. Determine exchange value.
+5. Approve exchange.
+6. Select new smartphone.
+7. Deduct exchange value from invoice.
+8. Generate exchange document.
+9. Create a used-device inventory record.
+
+### Used Phone Inventory
+
+Maintain separate inventory for:
+- New smartphones.
+- Used smartphones.
+- Refurbished smartphones.
+- Exchange-acquired devices.
+
+Track inspection, grading, repair costs, purchase cost and resale margin.
+
+Do not treat customer trade-ins as ordinary new distributor purchases.
+
+---
+
+# 12. CUSTOMER CRM
+
+Create a complete customer management system.
+
+### Customer Profile
+- Customer name.
+- Mobile number.
+- Email.
+- Address.
+- GSTIN, where applicable.
+- Customer type.
+- Date of birth, optional.
+- Customer notes.
+- Total purchases.
+- Outstanding balance.
+- Last purchase date.
+
+### Customer Features
+- Purchase history.
+- Invoice history.
+- Device ownership history.
+- IMEI lookup.
+- Warranty information.
+- Repair history.
+- Refund history.
+- Loyalty points.
+- Customer credit limit.
+- Customer communication history.
+
+### Customer Portal
+
+Allow customers to:
+- View their invoices.
+- Check warranty status.
+- Track repair status.
+- View repair estimates.
+- Check payment status.
+- Submit service requests.
+
+Use secure verification and restrict access to authorized customer records.
+
+---
+
+# 13. MOBILE REPAIR & SERVICE CENTER
+
+Build a full repair management system.
+
+### Repair Job Card
+
+Create a repair job card containing:
+- Job card number.
+- Customer.
+- Device brand.
+- Device model.
+- IMEI.
+- Serial number.
+- Device condition at reception.
+- Reported problem.
+- Accessories received.
+- Physical inspection.
+- Warranty status.
+- Assigned technician.
+- Estimated completion date.
+- Estimated repair cost.
+- Final repair cost.
+- Service status.
+
+### Repair Status
+- Received.
+- Under Inspection.
+- Estimate Pending.
+- Customer Approval Pending.
+- Approved.
+- Parts Required.
+- Under Repair.
+- Testing.
+- Ready for Delivery.
+- Delivered.
+- Cancelled.
+
+### Repair Workflow
+
+Customer Submission → Inspection → Diagnosis → Estimate → Customer Approval → Parts Allocation → Repair → Testing → Payment → Delivery.
+
+### Repair Management Features
+- Technician allocation.
+- Repair notes.
+- Parts consumption.
+- Labor charges.
+- Repair estimates.
+- Customer approval.
+- Repair warranty.
+- Service invoice.
+- Repair history.
+- Delivery confirmation.
+
+### Repair Notifications
+
+Send customers notifications when:
+- Device received.
+- Estimate prepared.
+- Approval required.
+- Repair started.
+- Device ready.
+- Payment pending.
+- Device delivered.
+
+Do not expose customer device data or private device credentials unnecessarily.
+
+---
+
+# 14. WARRANTY & AFTER-SALES MANAGEMENT
+
+Build warranty tracking for smartphones and accessories.
+
+### Warranty Information
+- Product.
+- IMEI.
+- Customer.
+- Purchase invoice.
+- Purchase date.
+- Warranty start.
+- Warranty expiry.
+- Warranty provider.
+- Warranty type.
+- Warranty terms.
+
+### Warranty Features
+- Warranty lookup by IMEI.
+- Warranty expiry reminders.
+- Manufacturer warranty records.
+- Shop warranty records.
+- Extended warranty plans.
+- Warranty claims.
+- Warranty service history.
+
+Clearly distinguish manufacturer warranty from retailer-provided warranty.
+
+Do not claim manufacturer warranty coverage without supporting purchase or warranty documentation.
+
+---
+
+# 15. ACCESSORIES & BUNDLE MANAGEMENT
+
+Allow stores to sell accessories independently and in bundles.
+
+Examples:
+- Smartphone + case.
+- Smartphone + screen protector.
+- Smartphone + charger.
+- Smartphone + earbuds.
+
+Features:
+- Accessory inventory.
+- Barcode management.
+- Bundle pricing.
+- Combo discounts.
+- Cross-selling suggestions.
+- Accessory profitability.
+- Accessory stock alerts.
+
+Allow the POS to recommend related accessories without automatically adding them to the customer's bill.
+
+---
+
+# 16. DISCOUNTS, OFFERS & LOYALTY
+
+Implement:
+- Product discounts.
+- Category discounts.
+- Brand discounts.
+- Coupon codes.
+- Festival offers.
+- Combo offers.
+- Customer-specific discounts.
+- Loyalty points.
+- Referral rewards.
+- Membership programs.
+
+Support discount permissions and approval limits.
+
+Maintain an audit log of discounts given by each employee.
+
+---
+
+# 17. GST BILLING & INVOICING
+
+Build Indian GST-compliant invoicing workflows.
+
+### Company Configuration
+- Legal business name.
+- GSTIN.
+- State.
+- Registered address.
+- Invoice prefix.
+- Invoice numbering sequence.
+- Tax configuration.
+- Bank details.
+- UPI QR configuration.
+
+### Invoice Fields
+- Invoice number.
+- Invoice date.
+- Seller details.
+- Customer details.
+- GSTIN where applicable.
+- Product description.
+- HSN/SAC.
+- Quantity.
+- Unit price.
+- Discount.
+- Taxable value.
+- Applicable GST.
+- CGST.
+- SGST.
+- IGST.
+- Total invoice value.
+
+### Important GST Rules
+- Apply CGST + SGST for applicable intra-state transactions.
+- Apply IGST for applicable inter-state transactions.
+- Support product-specific tax configuration.
+- Support credit notes and debit notes.
+- Support sales returns.
+- Maintain invoice numbering integrity.
+- Support applicable GST reporting exports.
+
+Do not hardcode GST rates. Make rates configurable and validate them against applicable rules.
+
+Support:
+- Thermal POS receipts.
+- A4 tax invoices.
+- PDF downloads.
+- Invoice printing.
+- Email invoice delivery.
+- WhatsApp invoice sharing through an approved integration.
+
+GST reports should be exportable for accountant review and reconciliation.
+
+Do not claim direct GST portal filing unless a verified integration has been implemented.
+
+---
+
+# 18. PAYMENT & CASH MANAGEMENT
+
+Support:
+- Cash.
+- UPI.
+- Debit card.
+- Credit card.
+- Bank transfer.
+- Cheque.
+- Wallet.
+- EMI.
+- Finance partner payment.
+- Split payments.
+
+### Payment Features
+- Advance payments.
+- Partial payments.
+- Customer dues.
+- Refunds.
+- Payment receipts.
+- Payment reconciliation.
+- Daily cash closing.
+- Cash drawer management.
+
+### EMI Management
+
+Allow recording EMI purchases and financing transactions.
+
+Store:
+- Finance partner.
+- Customer reference.
+- Financed amount.
+- Down payment.
+- Finance reference.
+- Transaction date.
+- Approval status.
+
+Treat the actual lender as the financing provider. Do not build an unauthorized lending or credit-scoring facility.
+
+---
+
+# 19. EXPENSE MANAGEMENT
+
+Create an expense module.
+
+Expense categories:
+- Rent.
+- Electricity.
+- Internet.
+- Staff salaries.
+- Marketing.
+- Transportation.
+- Maintenance.
+- Packaging.
+- Other expenses.
+
+Features:
+- Expense entries.
+- Expense category.
+- Vendor.
+- Payment method.
+- Receipt attachment.
+- Branch assignment.
+- Approval workflow.
+- Monthly expense reports.
+
+---
+
+# 20. ACCOUNTING & FINANCIAL REPORTS
+
+Implement a basic but structured accounting module.
+
+### Accounting Features
+- Chart of accounts.
+- Cash account.
+- Bank account.
+- Sales account.
+- Purchase account.
+- Expense accounts.
+- Customer receivables.
+- Supplier payables.
+- Payment entries.
+- Journal entries.
+- General ledger.
+
+Support double-entry bookkeeping for financial transactions.
+
+Every posted accounting transaction must balance:
+
+Total Debits = Total Credits.
+
+Never create financial entries silently without recording the corresponding transaction reference.
+
+Allow controlled journal adjustments with audit trails.
+
+---
+
+# 21. REPORTS & BUSINESS INTELLIGENCE
+
+Create detailed reports.
+
+### Sales Reports
+- Daily sales.
+- Weekly sales.
+- Monthly sales.
+- Product-wise sales.
+- Brand-wise sales.
+- Model-wise sales.
+- Employee-wise sales.
+- Branch-wise sales.
+- Customer-wise sales.
+
+### Inventory Reports
+- Current stock.
+- Stock valuation.
+- IMEI inventory.
+- Low stock.
+- Dead stock.
+- Damaged stock.
+- Stock movement.
+- Used phone inventory.
+
+### Profitability Reports
+- Gross profit.
+- Net profit estimate.
+- Product-wise margin.
+- Smartphone-wise margin.
+- Accessory-wise margin.
+- Branch-wise profitability.
+- Salesperson performance.
+
+### Repair Reports
+- Pending repair jobs.
+- Technician performance.
+- Repair revenue.
+- Spare parts consumption.
+- Average turnaround time.
+- Repair warranty claims.
+
+### Financial Reports
+- Cash flow.
+- Income and expenses.
+- Outstanding receivables.
+- Outstanding payables.
+- GST summary.
+- Payment method summary.
+- General ledger.
+
+Allow date filters, branch filters, export to Excel/CSV, and PDF generation.
+
+---
+
+# 22. BRANCH MANAGEMENT
+
+Support multiple store locations.
+
+Each branch should have:
+- Branch name.
+- Branch code.
+- Address.
+- Contact details.
+- GSTIN configuration, where applicable.
+- Manager.
+- Staff.
+- Warehouse.
+- POS configuration.
+- Stock.
+- Sales.
+- Expenses.
+- Reports.
+
+Support inter-branch stock transfers and branch-level reporting.
+
+Prevent staff from accessing unauthorized branches.
+
+---
+
+# 23. PUBLIC WEBSITE & ONLINE CATALOG
+
+Provide each tenant with an optional public storefront.
+
+### Public Storefront
+- Business logo.
+- Store details.
+- Product catalog.
+- Smartphone brands.
+- Product specifications.
+- Product images.
+- Available variants.
+- Accessories.
+- Offers.
+- Contact information.
+- WhatsApp enquiry.
+
+### Online Features
+- Customer registration.
+- Product search.
+- Shopping cart.
+- Online order placement.
+- Store pickup.
+- Delivery option.
+- Order tracking.
+- Payment gateway integration.
+
+The public storefront must only display available and published products.
+
+Support configurable domains or subdomains for tenants.
+
+---
+
+# 24. NOTIFICATION SYSTEM
+
+Implement a centralized notification engine.
+
+Channels:
+- In-app notifications.
+- Email.
+- SMS.
+- WhatsApp Business API.
+
+Events:
+- New sale.
+- New purchase.
+- Low stock.
+- Warranty expiry.
+- Pending repair.
+- Repair ready.
+- Customer payment overdue.
+- Supplier payment overdue.
+- Branch transfer.
+- New online order.
+
+Allow businesses to enable or disable individual notification events.
+
+Use queues for external notifications and record delivery status.
+
+---
+
+# 25. BARCODE & HARDWARE SUPPORT
+
+Support:
+- USB barcode scanners.
+- Barcode label printers.
+- Thermal receipt printers.
+- A4 printers.
+- QR code generation.
+- Cash drawers where supported.
+
+Barcode scanning should work through standard keyboard-emulating scanners.
+
+For IMEI labels, generate unique barcode or QR labels linked to the relevant device record.
+
+---
+
+# 26. SAAS SUBSCRIPTION MANAGEMENT
+
+The platform super-admin must be able to manage subscriptions.
+
+Create configurable plans.
+
+Suggested plans:
+
+### Free
+- 1 branch.
+- 1 user.
+- 100 products.
+- Basic POS.
+- Basic reports.
+
+### Starter – ₹499/month
+- 1 branch.
+- 3 users.
+- 1,000 products.
+- IMEI tracking.
+- GST billing.
+- Customer CRM.
+- Basic inventory.
+
+### Professional – ₹999/month
+- 3 branches.
+- 10 users.
+- Unlimited products, subject to fair-use policy.
+- Repair management.
+- Warranty tracking.
+- Exchange management.
+- Advanced reports.
+- Supplier management.
+
+### Business – ₹1,999/month
+- 10 branches.
+- 25 users.
+- Full accounting.
+- Multi-branch transfers.
+- Public storefront.
+- Advanced analytics.
+- API access.
+
+These are proposed configurable commercial prices, not hardcoded values.
+
+The super-admin must be able to:
+- Create plans.
+- Change prices.
+- Set feature limits.
+- Activate or deactivate subscriptions.
+- Offer trial periods.
+- Extend subscriptions.
+- View payment history.
+- Suspend overdue accounts.
+- Manage coupons.
+
+Do not delete tenant data when a subscription expires. Restrict access according to subscription policy and provide a recovery/export process.
+
+---
+
+# 27. PLATFORM SUPER-ADMIN PANEL
+
+Create a separate platform administration interface.
+
+Modules:
+- Dashboard.
+- Tenant management.
+- Subscription management.
+- Plan management.
+- Payment transactions.
+- Platform revenue.
+- User management.
+- Feature configuration.
+- System logs.
+- Support tickets.
+- Notification templates.
+- Global settings.
+
+Super-admin actions must be audited.
+
+---
+
+# 28. DATABASE DESIGN
+
+Create normalized MySQL migrations for the complete application.
+
+Suggested tables:
+
+### Platform
+- tenants
+- subscription_plans
+- subscriptions
+- subscription_payments
+- platform_users
+- platform_settings
+- support_tickets
+
+### Business
+- companies
+- branches
+- warehouses
+- users
+- roles
+- permissions
+- model_has_roles
+- model_has_permissions
+- activity_logs
+
+### Products
+- categories
+- brands
+- products
+- product_variants
+- product_images
+- product_barcodes
+- product_warranties
+- units
+
+### IMEI
+- serialized_items
+- imei_records
+- imei_movements
+- imei_warranty_records
+- imei_status_history
+
+### Purchasing
+- suppliers
+- purchase_orders
+- purchase_order_items
+- goods_receipts
+- goods_receipt_items
+- purchases
+- purchase_items
+- purchase_payments
+- purchase_returns
+
+### Inventory
+- stock_balances
+- stock_movements
+- stock_adjustments
+- stock_adjustment_items
+- stock_transfers
+- stock_transfer_items
+- stock_reservations
+
+### Sales
+- customers
+- sales
+- sale_items
+- sale_item_imeis
+- sale_payments
+- sales_returns
+- sales_return_items
+- credit_notes
+- quotations
+- quotation_items
+
+### Exchange
+- exchange_transactions
+- exchange_devices
+- used_devices
+- used_device_inspections
+
+### Repair
+- repair_jobs
+- repair_job_items
+- repair_estimates
+- repair_approvals
+- repair_status_history
+- repair_parts
+- repair_payments
+
+### Finance
+- accounts
+- journal_entries
+- journal_entry_lines
+- expenses
+- expense_categories
+- payment_methods
+- cash_registers
+- cash_closings
+
+### Other
+- discounts
+- coupons
+- loyalty_accounts
+- loyalty_transactions
+- notifications
+- notification_logs
+- online_orders
+- online_order_items
+- invoices
+- invoice_sequences
+- tax_rates
+- company_settings
+
+Use foreign keys, unique constraints, tenant and branch scoping, appropriate indexes, and decimal fields.
+
+Review and refine this proposed schema before implementation. Avoid unnecessary duplication and ensure all relationships are properly defined.
+
+---
+
+# 29. UI/UX REQUIREMENTS
+
+Create a premium, modern retail ERP interface.
+
+### Design Direction
+- Professional SaaS dashboard.
+- Clean typography.
+- Neutral background.
+- Clear visual hierarchy.
+- Responsive side navigation.
+- Compact data tables.
+- Consistent buttons.
+- Modern cards.
+- Accessible forms.
+- Useful empty states.
+- Toast notifications.
+- Confirmation dialogs.
+
+### Navigation
+
+Dashboard
+
+Reservations & Sales
+- POS
+- All Sales
+- New Sale
+- Quotations
+- Sales Returns
+
+Products & Inventory
+- Products
+- Categories
+- Brands
+- IMEI Registry
+- Stock Overview
+- Stock Transfers
+- Stock Adjustments
+
+Purchasing
+- Suppliers
+- Purchase Orders
+- Goods Receipts
+- Purchase Invoices
+- Purchase Returns
+
+Customers & CRM
+- Customers
+- Customer History
+- Loyalty
+
+Repair & Warranty
+- Repair Jobs
+- New Repair
+- Technician Management
+- Warranty Registry
+
+Exchange & Used Phones
+- New Exchange
+- Used Phone Inventory
+- Device Inspection
+
+Finance & Accounting
+- GST Invoices
+- Payments
+- Expenses
+- General Ledger
+- Cash Closing
+
+Analytics
+- Sales Reports
+- Inventory Reports
+- Profitability
+- Repair Reports
+- GST Reports
+
+Settings
+- Company
+- Branches
+- Users & Roles
+- Subscription
+- Integrations
+
+Make the POS the fastest and easiest screen to use.
+
+---
+
+# 30. SECURITY REQUIREMENTS
+
+Implement:
+- Secure authentication.
+- Role-based authorization.
+- Tenant-level isolation.
+- CSRF protection.
+- XSS protection.
+- SQL injection prevention through Eloquent and parameterized queries.
+- Input validation.
+- Secure file uploads.
+- Rate limiting.
+- Secure password hashing.
+- Session security.
+- Audit logging.
+- Database backups.
+- Permission checks at server level.
+
+Do not rely on frontend visibility to enforce permissions.
+
+Sensitive financial and IMEI records must be accessible only to authorized users.
+
+Do not store customer passwords, UPI PINs, card PINs or OTPs.
+
+---
+
+# 31. PERFORMANCE & RELIABILITY
+
+The software must:
+- Support large product catalogs.
+- Support high-volume IMEI records.
+- Use pagination.
+- Use database indexes.
+- Optimize dashboard queries.
+- Use eager loading.
+- Use queues for notifications.
+- Cache suitable dashboard aggregates.
+- Use database transactions for sales, purchases, transfers and returns.
+- Prevent duplicate invoice creation.
+- Prevent duplicate IMEI registration.
+- Provide graceful error handling.
+
+Implement reliable stock reconciliation tools.
+
+---
+
+# 32. TESTING REQUIREMENTS
+
+Create automated tests for:
+
+### Authentication
+- Login.
+- Logout.
+- Role permissions.
+- Tenant isolation.
+
+### Inventory
+- Product creation.
+- Variant creation.
+- IMEI registration.
+- Duplicate IMEI rejection.
+- Purchase stock update.
+- Branch transfer.
+- Stock adjustment.
+
+### Sales
+- POS sale.
+- IMEI selection.
+- Multiple payment methods.
+- GST calculation.
+- Stock deduction.
+- Sales returns.
+- Exchange transactions.
+
+### Repairs
+- Job creation.
+- Technician assignment.
+- Estimate approval.
+- Spare part consumption.
+- Repair completion.
+
+### Finance
+- Payment reconciliation.
+- Ledger balancing.
+- Customer dues.
+- Supplier dues.
+- Cash closing.
+
+### Subscription
+- Trial.
+- Upgrade.
+- Downgrade.
+- Expiry.
+- Feature restrictions.
+
+---
+
+# 33. IMPLEMENTATION PHASES
+
+Do not attempt to generate the entire system in one step.
+
+Build incrementally.
+
+### Phase 1 – Foundation
+- Laravel setup.
+- Database configuration.
+- Authentication.
+- Multi-tenancy.
+- Roles and permissions.
+- Company and branch management.
+- Main dashboard.
+
+### Phase 2 – Product & Inventory
+- Categories.
+- Brands.
+- Products.
+- Variants.
+- IMEI registry.
+- Stock management.
+- Suppliers.
+
+### Phase 3 – Purchasing
+- Purchase orders.
+- GRN.
+- Purchase invoices.
+- Supplier payments.
+- Inventory updates.
+
+### Phase 4 – POS & Sales
+- POS interface.
+- Barcode scanning.
+- IMEI selection.
+- GST calculations.
+- Invoice generation.
+- Payment handling.
+- Sales returns.
+
+### Phase 5 – Customer & Exchange
+- CRM.
+- Customer history.
+- Mobile exchange.
+- Used device inventory.
+
+### Phase 6 – Repair & Warranty
+- Job cards.
+- Technician management.
+- Repair estimates.
+- Spare parts.
+- Warranty tracking.
+
+### Phase 7 – Finance & Reports
+- Expenses.
+- Accounting.
+- Ledger.
+- Profitability.
+- GST reports.
+- Business analytics.
+
+### Phase 8 – Online Storefront
+- Product catalog.
+- Customer portal.
+- Online orders.
+- Payment gateway.
+
+### Phase 9 – SaaS & Finalization
+- Subscription plans.
+- Platform admin.
+- Notifications.
+- Security testing.
+- Performance testing.
+- Documentation.
+- Deployment.
+
+---
+
+# 34. DEVELOPMENT INSTRUCTIONS FOR THE AI CODING AGENT
+
+Follow these instructions strictly:
+
+1. First inspect the existing project directory, framework, dependencies, routes, database schema and current functionality.
+2. If a Laravel project already exists, extend it rather than creating a duplicate application.
+3. Do not overwrite existing working code without understanding its purpose.
+4. Prepare the database architecture before building business modules.
+5. Create migrations, models, controllers, services, policies, requests, views and tests in a structured manner.
+6. Keep business logic out of controllers wherever practical.
+7. Use database transactions for all important financial and inventory operations.
+8. Use reusable components and services.
+9. Implement real functionality. Do not create decorative buttons or fake dashboard numbers.
+10. Do not leave important workflows as TODOs or placeholders.
+11. Use realistic sample data for development and demonstrations.
+12. Add validation and meaningful error messages.
+13. Ensure every module works with tenant and branch permissions.
+14. Test each phase before proceeding to the next.
+15. Maintain a DEVELOPMENT_PROGRESS.md file showing completed modules, pending modules, known issues and next steps.
+16. Maintain a README.md with installation, configuration, migrations, queues, scheduler and deployment instructions.
+17. Provide database seeders for demo tenants, products, smartphones, IMEIs, customers, suppliers and transactions.
+18. Never expose real customer or financial information in demo environments.
+
+---
+
+# 35. FINAL ACCEPTANCE CRITERIA
+
+The software is considered ready for initial production release only when:
+
+- A business can register and configure its store.
+- Multiple branches can be created.
+- Employees can be assigned roles and permissions.
+- Products and smartphone variants can be registered.
+- Every smartphone can be tracked by IMEI.
+- Suppliers and purchases can be managed.
+- Goods received update inventory correctly.
+- Stock transfers work between branches.
+- POS sales can be completed.
+- IMEI records update correctly after sales.
+- GST invoices are generated correctly based on configured tax rules.
+- Multiple payment methods work.
+- Customer exchanges are recorded.
+- Used devices can be managed separately.
+- Repair job cards work from reception to delivery.
+- Warranty records can be searched by IMEI.
+- Expenses and basic accounting are functional.
+- Sales and profitability reports use actual data.
+- Tenant and branch isolation is tested.
+- Subscription restrictions work.
+- The application is responsive.
+- Automated tests cover critical workflows.
+- Installation and deployment documentation is complete.
+
+**Build this as a reliable commercial ERP product, not a basic CRUD demo. Prioritize inventory accuracy, IMEI traceability, billing correctness, financial consistency, security and ease of use.**
