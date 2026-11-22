@@ -24,21 +24,21 @@
 
     <!-- Public Header -->
     <header class="bg-white/95 backdrop-blur-md border-b border-slate-200/80 sticky top-0 z-30 shadow-xs">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
-            <a href="{{ route('shop.index') }}" class="flex items-center gap-3 group">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-sky-500 text-white flex items-center justify-center font-black text-xl shadow-md shadow-indigo-500/20 group-hover:scale-105 transition-transform">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
+            <a href="{{ route('shop.index') }}" class="flex items-center gap-3 group shrink-0">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-sky-500 text-white flex items-center justify-center font-black text-xl shadow-md shadow-indigo-500/20 group-hover:scale-105 transition-transform shrink-0">
                     W
                 </div>
                 <div>
-                    <h1 class="font-display font-extrabold text-slate-900 text-base leading-tight">{{ $company->name ?? 'Webotapp Mobiles' }}</h1>
-                    <p class="text-[11px] text-indigo-600 font-semibold flex items-center gap-1">
+                    <h1 class="font-display font-extrabold text-slate-900 text-base leading-tight whitespace-nowrap">{{ $company->name ?? 'Webotapp Mobiles' }}</h1>
+                    <p class="text-[11px] text-indigo-600 font-semibold flex items-center gap-1 whitespace-nowrap">
                         &larr; Back to Shop Catalog
                     </p>
                 </div>
             </a>
 
-            <div class="flex items-center gap-3">
-                <a href="https://wa.me/{{ $fullPhone }}?text=Hello,%20I%20am%20inquiring%20about%20{{ urlencode($product->name) }}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-bold shadow-md shadow-emerald-600/20 transition">
+            <div class="flex items-center gap-3 shrink-0">
+                <a href="https://wa.me/{{ $fullPhone }}?text=Hello,%20I%20am%20inquiring%20about%20{{ urlencode($product->name) }}" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-bold shadow-md shadow-emerald-600/20 transition whitespace-nowrap">
                     <svg class="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.588-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.299.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.353.101.174.45 0.743.966 1.203.664.591 1.224.774 1.397.86.173.087.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.144.39-.087s1.011.477 1.184.564.289.13.332.202c.043.073.043.419-.101.824z"/></svg>
                     <span>Inquire via WhatsApp</span>
                 </a>

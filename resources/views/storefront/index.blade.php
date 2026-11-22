@@ -37,44 +37,52 @@
     </div>
 
     <!-- Navigation Header -->
-    <header class="bg-white/95 backdrop-blur-md border-b border-slate-200/80 sticky top-0 z-40 transition-all">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between gap-4">
+    <header class="bg-white/95 backdrop-blur-md border-b border-slate-200/80 sticky top-0 z-40 transition-all" x-data="{ mobileNav: false }">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
             <!-- Brand Logo -->
-            <a href="{{ route('shop.index') }}" class="flex items-center gap-3 group">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-700 to-sky-500 text-white flex items-center justify-center font-black text-xl shadow-md shadow-indigo-500/20 group-hover:scale-105 transition-transform">
+            <a href="{{ route('shop.index') }}" class="flex items-center gap-3 group shrink-0">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-700 to-sky-500 text-white flex items-center justify-center font-black text-xl shadow-md shadow-indigo-500/20 group-hover:scale-105 transition-transform shrink-0">
                     W
                 </div>
                 <div>
-                    <div class="flex items-center gap-1.5">
-                        <span class="font-display font-black text-slate-900 text-base sm:text-lg tracking-tight">{{ $company->name ?? 'Webotapp Mobiles' }}</span>
-                        <span class="hidden sm:inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                    <div class="flex items-center gap-2">
+                        <span class="font-display font-black text-slate-900 text-base sm:text-lg tracking-tight whitespace-nowrap">{{ $company->name ?? 'Webotapp Mobiles' }}</span>
+                        <span class="hidden xl:inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200/80 whitespace-nowrap">
                             <svg class="w-3 h-3 text-emerald-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                             Verified Retailer
                         </span>
                     </div>
-                    <p class="text-[11px] text-slate-500 font-medium hidden sm:block">Mumbai's Trusted Multi-Brand Smart Store &bull; Andheri &amp; Bandra</p>
+                    <p class="text-[11px] text-slate-500 font-medium hidden sm:block whitespace-nowrap">Mumbai's Trusted Multi-Brand Smart Store &bull; Andheri &amp; Bandra</p>
                 </div>
             </a>
 
             <!-- Quick Nav Links -->
-            <nav class="hidden lg:flex items-center gap-6 text-sm font-semibold text-slate-600">
-                <a href="#catalog" class="hover:text-indigo-600 transition">Smartphones</a>
-                <a href="#brands" class="hover:text-indigo-600 transition">Brands</a>
-                <a href="#exchange" class="hover:text-indigo-600 transition flex items-center gap-1">
-                    Exchange &amp; Buyback
-                    <span class="px-1.5 py-0.2 rounded text-[10px] font-bold bg-amber-100 text-amber-800">Bonus</span>
+            <nav class="hidden lg:flex items-center gap-1 xl:gap-2">
+                <a href="#catalog" class="px-3 py-1.5 rounded-lg text-xs xl:text-sm font-semibold text-slate-600 hover:text-indigo-600 hover:bg-slate-100 transition whitespace-nowrap">
+                    Smartphones
                 </a>
-                <a href="#repairs" class="hover:text-indigo-600 transition">30-Min Repairs</a>
-                <a href="#branches" class="hover:text-indigo-600 transition">Stores</a>
+                <a href="#brands" class="px-3 py-1.5 rounded-lg text-xs xl:text-sm font-semibold text-slate-600 hover:text-indigo-600 hover:bg-slate-100 transition whitespace-nowrap">
+                    Brands
+                </a>
+                <a href="#exchange" class="px-3 py-1.5 rounded-lg text-xs xl:text-sm font-semibold text-slate-600 hover:text-indigo-600 hover:bg-slate-100 transition whitespace-nowrap inline-flex items-center gap-1.5">
+                    <span>Exchange &amp; Buyback</span>
+                    <span class="px-1.5 py-0.2 rounded text-[10px] font-bold bg-amber-100 text-amber-800 border border-amber-200">Bonus</span>
+                </a>
+                <a href="#repairs" class="px-3 py-1.5 rounded-lg text-xs xl:text-sm font-semibold text-slate-600 hover:text-indigo-600 hover:bg-slate-100 transition whitespace-nowrap">
+                    30-Min Repairs
+                </a>
+                <a href="#branches" class="px-3 py-1.5 rounded-lg text-xs xl:text-sm font-semibold text-slate-600 hover:text-indigo-600 hover:bg-slate-100 transition whitespace-nowrap">
+                    Stores
+                </a>
             </nav>
 
             <!-- Actions: WhatsApp Inquiry & Login -->
-            <div class="flex items-center gap-2 sm:gap-3">
+            <div class="flex items-center gap-2 sm:gap-3 shrink-0">
                 @if($company && $company->phone)
                     @php
                         $cleanPhone = preg_replace('/[^0-9]/', '', $company->phone);
                     @endphp
-                    <a href="https://wa.me/{{ str_starts_with($cleanPhone, '91') ? $cleanPhone : '91'.$cleanPhone }}?text=Hello%20{{ urlencode($company->name ?? 'Webotapp') }},%20I%20am%20interested%20in%20purchasing%20a%20phone%20or%20booking%20a%20repair." target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white text-xs sm:text-sm font-bold shadow-md shadow-emerald-600/20 transition-all hover:shadow-emerald-600/30">
+                    <a href="https://wa.me/{{ str_starts_with($cleanPhone, '91') ? $cleanPhone : '91'.$cleanPhone }}?text=Hello%20{{ urlencode($company->name ?? 'Webotapp') }},%20I%20am%20interested%20in%20purchasing%20a%20phone%20or%20booking%20a%20repair." target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white text-xs sm:text-sm font-bold shadow-md shadow-emerald-600/20 transition-all hover:shadow-emerald-600/30 whitespace-nowrap shrink-0">
                         <span class="relative flex h-2 w-2">
                             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-300 opacity-75"></span>
                             <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-100"></span>
@@ -83,10 +91,25 @@
                         <span>WhatsApp Us</span>
                     </a>
                 @endif
-                <a href="{{ route('login') }}" class="px-3.5 py-2 border border-slate-300 hover:border-slate-400 bg-white hover:bg-slate-50 text-slate-700 text-xs sm:text-sm font-semibold rounded-xl transition shadow-xs">
+                <a href="{{ route('login') }}" class="px-3.5 py-2 border border-slate-300 hover:border-slate-400 bg-white hover:bg-slate-50 text-slate-700 text-xs sm:text-sm font-semibold rounded-xl transition shadow-xs whitespace-nowrap shrink-0">
                     Staff Portal
                 </a>
+                <button type="button" @click="mobileNav = !mobileNav" class="lg:hidden p-2 text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-100">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
             </div>
+        </div>
+
+        <!-- Mobile Drawer Nav -->
+        <div x-show="mobileNav" x-cloak class="lg:hidden px-4 pt-2 pb-4 border-t border-slate-100 bg-white space-y-1 text-sm font-semibold">
+            <a href="#catalog" @click="mobileNav = false" class="block px-3 py-2 rounded-lg text-slate-700 hover:bg-indigo-50 hover:text-indigo-600">Smartphones</a>
+            <a href="#brands" @click="mobileNav = false" class="block px-3 py-2 rounded-lg text-slate-700 hover:bg-indigo-50 hover:text-indigo-600">Brands</a>
+            <a href="#exchange" @click="mobileNav = false" class="flex items-center justify-between px-3 py-2 rounded-lg text-slate-700 hover:bg-indigo-50 hover:text-indigo-600">
+                <span>Exchange &amp; Buyback</span>
+                <span class="px-1.5 py-0.2 rounded text-[10px] font-bold bg-amber-100 text-amber-800">Bonus</span>
+            </a>
+            <a href="#repairs" @click="mobileNav = false" class="block px-3 py-2 rounded-lg text-slate-700 hover:bg-indigo-50 hover:text-indigo-600">30-Min Repairs</a>
+            <a href="#branches" @click="mobileNav = false" class="block px-3 py-2 rounded-lg text-slate-700 hover:bg-indigo-50 hover:text-indigo-600">Store Locations</a>
         </div>
     </header>
 
